@@ -41,7 +41,7 @@ $recipes = [
 
 function displayAuthor(string $authorEmail, array $users) : string
 {
-    for($i = 0; $i < count(users); $i++) {
+    for($i = 0; $i < count($users); $i++) {
         $author = $users[$i];
         if($authorEmail == $author['email']) {
             return $author['full_name'] . '(' . $author['age'] . ' ans)'; 
@@ -52,7 +52,7 @@ function displayAuthor(string $authorEmail, array $users) : string
 function isValidRecipe(array $recipe) : bool
 {
     if (array_key_exists('is_enabled', $recipe)) {
-        $isEnabled = $recipe['is_enabled']
+        $isEnabled = $recipe['is_enabled'];
     } else {
         $isEnabled = false;
     }
@@ -64,10 +64,10 @@ function getRecipes(array $recipes) : array
     $valid_recipes = [];
     foreach($recipes as $recipe) {
         if (isValidRecipe($recipe)) {
-            $valid-recipes[] = $recipe;
+            $valid_recipes[] = $recipe;
         }
     }
-    return $valid-recipes;
+    return $valid_recipes;
 }
 
 ?>
