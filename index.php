@@ -23,9 +23,10 @@
             include_once('functions.php');
         ?>
 
-        <!-- inclusion de l'entête du site -->
-        <?php include_once('header.php'); ?>
-        
+        <!-- inclusion du formulaire -->
+        <?php include_once('login.php'); ?>
+
+        <?php if(isset($loggedUser)): ?>
         <?php foreach(getRecipes($recipes) as $recipe) : ?>
             <article>
                 <h3><?php echo $recipe['title']; ?></h3>
@@ -33,6 +34,7 @@
                 <i><?php echo displayAuthor($recipe['author'], $users); ?></i>
             </article>
         <?php endforeach ?>
+        <?php endif ?>
     </div>
 
     <!-- inclusion du bas de page du site -->
