@@ -1,5 +1,23 @@
 <?php
 
+$users = [
+    [
+        'full_name' => 'Mickaël Andrieu',
+        'email' => 'mickael.andrieu@exemple.com',
+        'age' => 34,
+    ],
+    [
+        'full_name' => 'Mathieu Nebra',
+        'email' => 'mathieu.nebra@exemple.com',
+        'age' => 34,
+    ],
+    [
+        'full_name' => 'Laurène Castor',
+        'email' => 'laurene.castor@exemple.com',
+        'age' => 28,
+    ],
+];
+
 $recipes = [
     [
         'title' => 'Cassoulet',
@@ -20,6 +38,38 @@ $recipes = [
         'is_enabled' => true,
     ],
 ];
+
+function displayAuthor(string $authorEmail, array $users) : string
+{
+    for($i = 0; $i < count(users); $i++) {
+        $author = $users[$i];
+        if($authorEmail == $author['email']) {
+            return $author['full_name'] . '(' . $author['age'] . ' ans)'; 
+        }
+    }
+}
+
+function isValidRecipe(array $recipe) : bool
+{
+    if (array_key_exists('is_enabled', $recipe)) {
+        $isEnabled = $recipe['is_enabled']
+    } else {
+        $isEnabled = false;
+    }
+    return $isEnabled;
+}
+
+function getRecipes(array $recipes) : array
+{
+    $valid_recipes = [];
+    foreach($recipes as $recipe) {
+        if (isValidRecipe($recipe)) {
+            $valid-recipes[] = $recipe;
+        }
+    }
+    return $valid-recipes;
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -32,19 +82,14 @@ $recipes = [
 </head>
 <body>
     <div class="container">
-        <h1>Affichage des recettes</h1>
+        <h1>Liste des recettes</h1>
         <!-- Boucle sur les recettes -->
-        <?php foreach($recipes as $recipe) : ?>
-            <!-- si la clé existe et a pour valeur "vrai", on affiche -->
-            <?php if (array_key_exists('is_enabled', $recipe) && $recipe['is_enabled'] == true): ?>
-
+        <?php foreach(getRecipes($recipes) as $recipe) : ?>
                 <article>
                     <h3><?php echo $recipe['title']; ?></h3>
                     <div><?php echo $recipe['recipe']; ?></div>
-                    <i><?php echo $recipe['author']; ?></i>
+                    <i><?php echo displayAuthor($recipe['author'], $users); ?></i>
                 </article>
-
-            <?php endif; ?>
         <?php endforeach ?>
     </div>   
 </body>
